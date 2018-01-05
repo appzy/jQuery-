@@ -1,9 +1,14 @@
-##jQuery夜晚天空满天星星闪烁动画代码
-###效果图
-<a href="img/Totoro.png"><img src="img/Totoro.png"/></a> 
-[在线编辑](http://en.jsrun.net/7GYKp)
+# jQuery夜晚天空满天星星闪烁动画代码
 
-CSS样式
+## 效果图
+
+<a href="img/Totoro.png"><img src="img/Totoro.png"/></a> 
+
+[在线查看](http://en.jsrun.net/7GYKp)
+
+[在线编辑](http://en.jsrun.net/7GYKp/edit)
+
+### CSS样式
 ```
 <style>
 * {
@@ -71,7 +76,7 @@ p > span > a:hover {
 }
 </style>
 ```
-JavaScript动画代码
+### JavaScript动画代码
 ```
 var cols = ['#f5d76e','#f7ca18','#f4d03f','#ececec','#ecf0f1','#a2ded0'];
 var stars = 500;
