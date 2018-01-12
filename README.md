@@ -1,14 +1,22 @@
 # jQuery夜晚天空满天星星闪烁动画代码
 
-## 效果图
+## 萤火虫星空效果图
 
-<a href="img/Totoro.png"><img src="img/Totoro.png"/></a> 
+<a href="img/Totoro.gif"><img src="img/Totoro.gif"/></a> 
 
 [在线查看](http://en.jsrun.net/7GYKp)
 
 [在线编辑](http://en.jsrun.net/7GYKp/edit)
 
-### CSS样式
+## 背景星星效果图
+
+<a href="img/blick.gif"><img src="img/blick.gif"/></a> 
+
+[在线查看](http://en.jsrun.net/D2qKp)
+
+[在线编辑](http://en.jsrun.net/D2qKp/edit)
+
+###  萤火虫星空CSS样式
 ```
 <style>
 * {
@@ -76,7 +84,7 @@ p > span > a:hover {
 }
 </style>
 ```
-### JavaScript动画代码
+### 萤火虫星空JavaScript动画代码
 ```
 var cols = ['#f5d76e','#f7ca18','#f4d03f','#ececec','#ecf0f1','#a2ded0'];
 var stars = 500;
@@ -100,4 +108,110 @@ setInterval(function(){
  		$(this).css('top', Math.random()*100 + '%').css('left', Math.random()*100 + '%'); 
   });
 }, 100000);
+```
+
+### 背景星星JavaScript代码
+
+源码是经过babel 编译的
+
+如果你的浏览器不支持的话
+
+[bable在线编译](http://babeljs.io/repl/)
+```
+(function () {
+  const star_png = 'http://flowpp.com:8080/img/star.png'
+  const ICON_SIZE = 7
+  const ICON_NUM = 7
+  const star_num = 300
+
+  class Start {
+      constructor (star, rect) {
+          this.star = star
+          this.init(rect)
+      }
+      init (rect) {
+          this.rect = rect || this.rect
+          this.index = Math.random() * ICON_NUM | 0
+          this.x = Math.random() * this.rect.width
+          this.xSpd = Math.random() * 0.04 - 0.02
+          this.y = Math.random() * this.rect.height
+          this.alpha = Math.sin(Math.random() * Math.PI * 2)
+          this.timer = 0
+      }
+      draw (ctx) {
+          ctx.save()
+          ctx.globalAlpha = this.alpha * 0.2
+          ctx.drawImage(this.star, this.index * ICON_NUM, 0, ICON_SIZE, ICON_SIZE, this.x, this.y, ICON_SIZE, ICON_SIZE)
+          ctx.restore()
+      }
+      update () {
+          this.x += this.xSpd
+          if (this.x > this.rect.width || this.x < 0) {
+              this.init()
+          }
+
+          this.timer += 1
+          if (this.timer > 8) {
+              this.index = (this.index + 1) % ICON_NUM
+              this.timer = 0
+          }
+      }
+  }
+  
+  class StarrySky {
+      constructor (props) {
+          let dom = props.dom
+          let t = this
+          t.dom = dom
+          t.context = dom.getContext('2d')
+          t.star = new Image()
+          t.now = Date.now()
+
+          let stars = []
+          t.stars = stars
+
+          let loop = t.loop
+          t.star.onload = function () {
+              t.rect = dom.getBoundingClientRect()
+              t.dom.width = t.rect.width
+              t.dom.height = t.rect.height
+
+              for (let i = 0; i < star_num; i++) {
+                  stars[i] = new Start(t.star, t.rect)
+              }
+
+              setInterval(loop, 40)
+
+              window.addEventListener('resize', function () {
+                  t.rect = dom.getBoundingClientRect()
+                  t.dom.width = t.rect.width
+                  t.dom.height = t.rect.height
+                  stars.map(s => {
+                      s.init(t.rect)
+                  })
+              })
+          }
+          this.star.src = star_png
+      }
+      loop = () => {
+          this.context.fillStyle = 'rgb(10, 15, 39)'
+          let {width, height} = this.rect
+          this.context.fillRect(0, 0, width, height)
+          for (let i = 0; i < star_num; i++) {
+              this.stars[i].update()
+              this.stars[i].draw(this.context)
+          }
+      }
+  }
+  
+ 	const canvas = document.createElement('canvas')
+  canvas.width = document.documentElement.clientWidth
+  canvas.height = document.documentElement.clientHeight
+  document.body.insertBefore(canvas, document.body.children[0])
+  canvas.className = 'starry-sky'
+  let starrySky = new StarrySky({
+      dom: canvas
+  })
+  
+})()
 ```
