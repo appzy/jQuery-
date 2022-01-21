@@ -215,3 +215,4 @@ setInterval(function(){
   
 })()
 ```
+Copyright 2017 appzy
