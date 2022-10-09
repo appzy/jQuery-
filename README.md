@@ -1,6 +1,6 @@
-# jQuery夜晚天空满天星星闪烁动画代码
+# jQuery🔥夜晚天空满天星星闪烁动画代码
 
-## 萤火虫星空效果图
+## 萤火虫星空效果图 动画
 
 <a href="img/Totoro.gif"><img src="img/Totoro.gif"/></a> 
 
