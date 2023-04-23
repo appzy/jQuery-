@@ -216,7 +216,7 @@ setInterval(function(){
 })()
 ```
 ![image](https://user-images.githubusercontent.com/18324171/232403776-ab828413-ddae-4bf9-a582-9539531502ca.png)
-### 樱花雨 
+### 樱花雨效果图
 [查看源码](https://github.com/appzy/jQuery-/blob/master/flower.html)
 
 Copyright 2017 appzy
